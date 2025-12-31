@@ -27,3 +27,19 @@ export async function initDb() {
 
     await initConnection.end()
 }
+
+let conn = null
+
+export async function getMysqlConnection() {
+    if (conn) return conn;
+  else {
+    conn = await mysql.createConnection({
+      host: "localhost",
+      user: "root",
+      password: "root",
+      port: 3306,
+      database: "todos",
+    });
+    return conn;
+  }
+}
